@@ -1,0 +1,16 @@
+<h1>Dragon Ball Z</h1>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <app-characters [characters]="characters"> </app-characters>
+  </div>
+  <div class="col">
+    <h3>
+      Add <small>{{ newChar.name }}</small>
+    </h3>
+    <hr />
+    <app-add-char [characters]="characters" [newChar]="newChar"></app-add-char>
+    <!-- <button (click)="deleteChar()">Delete</button> -->
+  </div>
+</div>

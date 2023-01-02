@@ -1,0 +1,20 @@
+
+<form (ngSubmit)="add()">
+    <input
+      type="text"
+      name="name"
+      placeholder="Name"
+      [(ngModel)]="newChar.name"
+    />
+    <!-- INPUT DATA PICKER -->
+    <!-- [value]="newChar.name"  (input)="onChange($event)" -->
+
+    <input
+      type="number"
+      name="power"
+      placeholder="Power"
+      [(ngModel)]="newChar.power"
+    />
+
+    <button type="submit">Add</button>
+  </form>
