@@ -1,0 +1,24 @@
+<h2>By Country</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <app-country-input
+      (onEnter)="search($event)"
+      (onDebounce)="suggestion($event)"
+      placeholder="Search country"
+    ></app-country-input>
+  </div>
+</div>
+
+<hr />
+
+<div *ngIf="error" class="alert alert-danger">
+  No se encontró nada con el término {{ query }}
+</div>
+
+<div *ngIf="!error" class="row">
+  <div class="col">
+    <app-country-table [countries]="countries"></app-country-table>
+  </div>
+</div>
