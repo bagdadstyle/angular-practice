@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 import { Country } from '../interfaces/country.interface';
 
@@ -23,5 +23,9 @@ export class CountryService {
   getCountryById(id: string): Observable<Country> {
     const url = `${this.API_KEY}/alpha/${id}`;
     return this.http.get<Country>(url);
+  }
+  searchRegion(id: string): Observable<Country[]> {
+    const url = `${this.API_KEY}/region/${id}`;
+    return this.http.get<Country[]>(url);
   }
 }
