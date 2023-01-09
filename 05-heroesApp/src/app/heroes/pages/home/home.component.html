@@ -3,6 +3,8 @@
     <mat-sidenav #sidenav mode="push">
         <mat-toolbar>
             <span>Menu</span>
+        <span class="spacer"></span>
+
             <button mat-icon-button
             (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
@@ -16,17 +18,19 @@
             <mat-icon mat-list-icon>label</mat-icon>  
                 <span>Heroes List</span>
             </a>
-            <a routerLink="./list"
+            <a routerLink="./add"
             (click)="sidenav.toggle()"
             mat-list-item 
-            ><mat-icon>label</mat-icon><span>Add Heroe</span>
+            ><mat-icon
+            mat-list-item 
+            >add</mat-icon><span>Add Heroe</span>
             </a>
-            <a routerLink="./list"
+            <a routerLink="./search"
             (click)="sidenav.toggle()" 
             mat-list-item 
             >
-            <mat-icon>add</mat-icon>  
-                <span>Heroes List</span>
+            <mat-icon mat-list-item >search</mat-icon>  
+                <span>Search</span>
             </a>
             
         </mat-nav-list>    
@@ -36,6 +40,15 @@
         (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
+
+        <span class="spacer"></span>
+        <button mat-button>
+            Logout
+        </button>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+
+    <div class="container"> 
+
+        <router-outlet></router-outlet>
+    </div>
 </mat-sidenav-container>
