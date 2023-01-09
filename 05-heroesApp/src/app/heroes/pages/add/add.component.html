@@ -1,1 +1,88 @@
-<p>add works!</p>
+
+<h1>New Hero <small>{{heroe.superhero}}</small></h1>
+
+
+<div class="grid">
+    <div class="title">
+
+        <div class="name">
+
+            <mat-form-field class="form">
+                <mat-label>Super Hero</mat-label>
+                <input matInput
+                 type="text"
+                 [(ngModel)]="heroe.superhero"
+                 required>
+            </mat-form-field>
+    
+            <mat-form-field class="form">
+                <mat-label>Alter ego</mat-label>
+                <input 
+                 matInput
+                 type="text"
+                 [(ngModel)]="heroe.alter_ego"
+                 required>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field class="form">
+            <mat-label>First Appearance</mat-label>
+            <input 
+            matInput 
+            type="text"
+            [(ngModel)]="heroe.first_appearance"
+            required>
+        </mat-form-field>
+
+        <mat-form-field class="form">
+            <mat-label>Characters</mat-label>
+            <input 
+            matInput 
+            type="text"
+            [(ngModel)]="heroe.characters"
+             required>
+        </mat-form-field>
+
+        <mat-form-field class="form">
+            <mat-label>Publisher</mat-label>
+            <mat-select [(ngModel)]="heroe.publisher" required>
+                <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
+                    {{publisher.description}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form">
+            <mat-label>Photo Url</mat-label>
+            <input 
+            matInput
+            type="url"
+            [(ngModel)]="heroe.alt_image"
+            required>
+        </mat-form-field>
+        <br>
+        <div class="button-group">
+            <button
+         mat-raised-button 
+         color="primary"
+         (click)="save()">
+            <mat-icon>edit</mat-icon>
+            Save
+        </button>
+
+            <button
+           *ngIf="heroe.id" 
+            mat-raised-button
+             color="warn"
+             (click)="delete()"
+             >
+                <mat-icon>remove</mat-icon>
+                Delete</button>
+        
+        </div>
+    </div>
+    <div class="content">
+        <img [src]="heroe | image" alt="">
+        asd
+    </div>
+</div>

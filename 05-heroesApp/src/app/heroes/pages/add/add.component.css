@@ -1,0 +1,46 @@
+img{
+    width: 100%;
+    border-radius: 5px;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'title content';
+    
+    gap: 25px
+}
+
+.title{
+    grid-area: title;
+    min-width: 100%;
+}
+.content{
+    grid-area: content;
+}
+.form{
+    display: flex;
+}
+.name{
+    display: flex;
+    gap: 10px
+}
+.name mat-form-field{
+    width: 100%;
+}
+button{
+    width: 100%;
+}
+.button-group{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+
+@media (max-width: 570px){
+    .grid{
+        grid-template-columns:  1fr;
+        grid-template-areas: 'title'
+                             'content'
+    }
+}

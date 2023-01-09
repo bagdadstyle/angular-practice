@@ -9,6 +9,7 @@ import { Heroe } from '../interfaces/heroes.interface';
 })
 export class HeroesService {
   private baseUrl: string = environment.baseUrl;
+
   constructor(private http: HttpClient) {}
 
   getHeroes(): Observable<Heroe[]> {
@@ -21,5 +22,14 @@ export class HeroesService {
     return this.http.get<Heroe[]>(
       `${this.baseUrl}/heroes/?q=${query}&_limit=6`
     );
+  }
+  addHero(heroe: Heroe): Observable<Heroe> {
+    return this.http.post<Heroe>(`${this.baseUrl}/heroes`, heroe);
+  }
+  updateHero(heroe: Heroe): Observable<Heroe> {
+    return this.http.put<Heroe>(`${this.baseUrl}/heroes/${heroe.id}`, heroe);
+  }
+  deleteHero(heroe: Heroe): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/heroes/${heroe.id}`);
   }
 }
