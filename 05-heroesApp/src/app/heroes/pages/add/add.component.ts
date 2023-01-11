@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { ConfirmComponent } from '../../components/confirm/confirm.component';
 import { Heroe, Publisher } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -32,13 +34,13 @@ export class AddComponent implements OnInit {
   constructor(
     private heroeService: HeroesService,
     private activatedRoute: ActivatedRoute,
-    private router:Router,
-    private snackBar: MatSnackBar
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-
-    if(!this.router.url.includes('edit')) return;
+    if (!this.router.url.includes('edit')) return;
 
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.heroeService.getHeroeById(id)))
@@ -47,28 +49,36 @@ export class AddComponent implements OnInit {
 
   save() {
     if (this.heroe.superhero.trim().length === 0) return;
-    
-    if(this.heroe.id){
+
+    if (this.heroe.id) {
       // Update
-      this.heroeService.updateHero(this.heroe)
-      .subscribe(heroe => this.showSnack('Updated'))
-    }
-    else{  
+      this.heroeService
+        .updateHero(this.heroe)
+        .subscribe((heroe) => this.showSnack('Updated'));
+    } else {
       this.heroeService.addHero(this.heroe).subscribe((heroe) => {
-        this.router.navigate(['/heroes/edit', heroe.id])
-        this.showSnack('Created')
+        this.router.navigate(['/heroes/edit', heroe.id]);
+        this.showSnack('Created');
       });
     }
   }
-  delete(){
-    this.heroeService.deleteHero(this.heroe)
-    .subscribe((resp) =>{
-      this.router.navigate(['/heroes'])
-    })
+  delete() {
+    const dialog = this.dialog.open(ConfirmComponent, {
+      width: '300px',
+      data: this.heroe,
+    });
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.heroeService.deleteHero(this.heroe).subscribe((resp) => {
+          this.router.navigate(['/heroes']);
+        });
+      }
+    });
   }
-  showSnack(message: string): void{
+  showSnack(message: string): void {
     this.snackBar.open(message, 'Ok!', {
-      duration: 2500
-    })
+      duration: 2500,
+    });
   }
 }

@@ -1,5 +1,6 @@
 
-<h1>New Hero <small>{{heroe.superhero}}</small></h1>
+<h1>{{( heroe.id ? 'Edit' : 'New')}}
+    Hero <small>{{heroe.superhero}}</small></h1>
 
 
 <div class="grid">
@@ -67,7 +68,7 @@
          color="primary"
          (click)="save()">
             <mat-icon>edit</mat-icon>
-            Save
+            {{( heroe.id ? 'Update' : 'Save')}}
         </button>
 
             <button
